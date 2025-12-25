@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('🌿 治愈系记账')),
       body: ValueListenableBuilder(
-        valueListenable: box.listenable(),
+        valueListenable: box,
         builder: (context, Box<Transaction> b, _) {
           if (b.isEmpty) {
             return const Center(child: Text('暂无记录\n点击 + 记一笔吧 🌸'));
