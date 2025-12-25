@@ -9,8 +9,16 @@ workflows:
       - name: Install dependencies
         script: |
           flutter pub get
-          flutter pub run build_runner build --delete-conflicting-outputs
-      - name: Build release APK
+          
+  - name: Generate Hive adapters (build_runner)
+    script: |
+      flutter pub run build_runner build --delete-conflicting-outputs
+
+  - name: Build app bundle
+    script: |
+      flutter build appbundle --debug
+          
+  - name: Build release APK
         script: |
           flutter build apk --release
     artifacts:
