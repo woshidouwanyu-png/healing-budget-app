@@ -1,18 +1,15 @@
 workflows:
   android-workflow:
-    name: Build Android APK Only
+    name: Build APK Only
     environment:
       flutter: stable
     scripts:
       - name: Get packages
         script: flutter pub get
-
-      - name: Build APK (Release)
+      - name: Build APK
         script: flutter build apk --release
-
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
-
     publishing:
       email:
         recipients:
