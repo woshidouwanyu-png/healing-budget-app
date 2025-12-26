@@ -1,9 +1,14 @@
 import 'package:hive/hive.dart';
+
 part 'wishlist_place.g.dart';
 
-@HiveType(typeId: 2)
-class WishlistPlace extends HiveObject {
-  @HiveField(0) String title;
-  @HiveField(1) String story;
-  WishlistPlace(this.title, this.story);
+@HiveType(typeId: 1)
+class WishlistPlace {
+  @HiveField(0)
+  final String placeName;
+
+  @HiveField(1)
+  final String location;
+
+  WishlistPlace({required this.placeName, required this.location});
 }
