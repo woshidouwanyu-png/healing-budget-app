@@ -10,5 +10,6 @@ class Transaction {
   @HiveField(1)
   final double amount;
 
+ 
   Transaction({required this.name, required this.amount});
 }
