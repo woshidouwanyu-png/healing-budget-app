@@ -1,5 +1,6 @@
 name: healing_budget
-description: 治愈系记账
+description: A healing budget app.
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
@@ -9,14 +10,17 @@ dependencies:
   flutter:
     sdk: flutter
   hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  path_provider: ^2.1.1
-  speech_to_text: ^6.5.0
-  permission_handler: ^11.3.1
+  hive_flutter: ^1.1.0        # ← 必须添加这一行！
+  path_provider: ^2.1.5
 
 dev_dependencies:
-  hive_generator: ^2.0.0
-  build_runner: ^2.4.8
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.13
+  hive_generator: ^2.0.1      # ← 用于生成 .g.dart
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/
