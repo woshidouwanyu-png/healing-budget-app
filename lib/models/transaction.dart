@@ -1,12 +1,14 @@
 import 'package:hive/hive.dart';
+
 part 'transaction.g.dart';
 
-@HiveType(typeId: 1)
-class Transaction extends HiveObject {
-  @HiveField(0) String merchant;
-  @HiveField(1) double amount;
-  @HiveField(2) DateTime timestamp;
+@HiveType(typeId: 0)
+class Transaction {
+  @HiveField(0)
+  final String name;
 
-  Transaction({required this.merchant, required this.amount, DateTime? timestamp})
-      : timestamp = timestamp ?? DateTime.now();
+  @HiveField(1)
+  final double amount;
+
+  Transaction({required this.name, required this.amount});
 }
