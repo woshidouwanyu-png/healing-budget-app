@@ -1,45 +1,27 @@
 workflows:
-  android-apk:
-    name: Build Android APK
-    max_build_duration: 30
+  android-workflow:
+    name: Build Android AAB
     environment:
       flutter: stable
-      xcode: none  # 仍建议保留
+      xcode: latest
+      cocoapods: default
     scripts:
-      - name: Install dependencies
+      - name: Get Flutter packages
         script: |
           flutter pub get
-          
-  - name: Generate Hive adapters (build_runner)
-    script: |
-      flutter pub run build_runner build --delete-conflicting-outputs
 
-  - name: Get dependencies
-    script: flutter pub get
-
-  - name: Generate Hive code
-    script: |
-      flutter pub run build_runner build --delete-conflicting-outputs
-
-  - name: Build app bundle
-    script: |
-      flutter build appbundle --debug
-  - name: Get dependencies
-    script: flutter pub get
-
-  - name: Generate Hive adapters
-    script: |
-      flutter pub run build_runner build --delete-conflicting-outputs
-
-  - name: Build app bundle
-    script: flutter build appbundle --debug
-          
-  - name: Build release APK
+      - name: Generate Hive adapters
         script: |
-          flutter build apk --release
+          flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Build Android App Bundle (Debug)
+        script: |
+          flutter build appbundle --debug
+
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+      - build/app/outputs/bundle/debug/app-debug.aab
+
     publishing:
       email:
         recipients:
-          - 643905958@qq.com
+          - 643905958@qq.com  # ← 改成你的邮箱
