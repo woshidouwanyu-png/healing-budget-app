@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart'; // ← 关键：提供 .listenable()
 import '../models/transaction.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,28 +8,30 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   final box = Hive.box<Transaction>('transactions');
-return Scaffold(
-  appBar: AppBar(title: const Text('🌿 治愈系记账')),
-  body: ValueListenableBuilder<Box<Transaction>>(
-    valueListenable: box.listenable(), // 使用 .listenable() 方法
-    builder: (context, b, _) {
-      if (b.isEmpty) {
-        return const Center(child: Text('暂无记录\n点击 + 记一笔吧 🌸'));
-      } else {
-        // 这里可以添加处理非空情况的代码
-        // 例如：展示交易列表等
-      }
-    },
-  ),
-);
+    final box = Hive.box<Transaction>('transactions');
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('🌿 治愈系记账')),
+      body: ValueListenableBuilder<Box<Transaction>>(
+        valueListenable: box.listenable(), // ← 正确用法
+        builder: (context, b, _) {
+          if (b.isEmpty) {
+            return const Center(
+              child: Text(
+                '暂无记录\n点击 + 记一笔吧 🌸',
+                textAlign: TextAlign.center,
+              ),
+            );
+          }
+
+          // 必须返回一个 Widget（不能只写 if）
           return ListView.builder(
             itemCount: b.length,
-            itemBuilder: (c, i) {
+            itemBuilder: (context, i) {
               var tx = b.getAt(i)!;
               return ListTile(
-                title: Text(tx.merchant),
-                subtitle: Text('¥${tx.amount.toStringAsFixed(2)}'),
+                title: Text(tx.name),
+                subtitle: Text('${tx.amount.toStringAsFixed(2)} 元'),
               );
             },
           );
