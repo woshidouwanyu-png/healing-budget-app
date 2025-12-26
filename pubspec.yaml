@@ -22,4 +22,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  # assets:   ← 整行注释掉或删除
+  assets:
+    - assets/
