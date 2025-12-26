@@ -1,6 +1,6 @@
 workflows:
-  android:
-    name: Build APK
+  android-apk:
+    name: Build Release APK
     environment:
       flutter: stable
     scripts:
